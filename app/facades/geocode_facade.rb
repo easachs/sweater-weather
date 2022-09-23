@@ -3,6 +3,6 @@
 class GeocodeFacade
   def self.geocode(city)
     service = GeocodeService.geocode(city)
-    Geocode.new(service) if service[:results].first[:locations].any?
+    Geocode.new(service)
   end
 end

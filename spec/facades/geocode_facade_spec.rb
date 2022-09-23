@@ -12,6 +12,8 @@ RSpec.describe GeocodeFacade do
 
   it 'errors with no location', vcr: 'empty_geocode' do
     none = GeocodeFacade.geocode('')
-    expect(none).to be_nil
+    expect(none).to be_a(Geocode)
+    expect(none.lat).to be_nil
+    expect(none.lng).to be_nil
   end
 end
