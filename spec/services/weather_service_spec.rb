@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe WeatherService do
-  it 'returns response body with lat/lon', vcr: 'denver_forecast' do
+  it 'returns response body with lat/lon', vcr: 'denver_weather' do
     geocode = GeocodeFacade.geocode('Denver')
     denver = WeatherService.forecast(geocode)
     expect(denver).to be_a(Hash)
@@ -31,7 +31,6 @@ RSpec.describe WeatherService do
     expect(denver[:current]).to have_key(:humidity)
     expect(denver[:current][:humidity]).to be_a(Integer)
     expect(denver[:current]).to have_key(:uvi)
-    expect(denver[:current][:uvi]).to be_a(Float)
     expect(denver[:current]).to have_key(:visibility)
     expect(denver[:current][:visibility]).to be_a(Integer)
     expect(denver[:current]).to have_key(:weather)
@@ -83,7 +82,7 @@ RSpec.describe WeatherService do
     end
   end
 
-  it 'errors with no location', vcr: 'empty_forecast' do
+  it 'errors with no location', vcr: 'empty_weather' do
     geocode = GeocodeFacade.geocode('')
     none = WeatherService.forecast(geocode)
     expect(none).to be_a(Hash)
