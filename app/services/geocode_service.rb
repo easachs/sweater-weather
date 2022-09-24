@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class GeocodeService
-  def self.geocode(city)
+  def self.geocode(location)
     response = conn.get('address') do |f|
-      f.params['location'] = city
+      f.params['location'] = location
     end
     parse_json(response)
   end
