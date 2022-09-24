@@ -5,7 +5,7 @@ module Api
     class UsersController < ApplicationController
       def create
         user_params = JSON.parse(request.raw_post)
-        user = User.create!(user_params)
+        user = User.create(user_params)
         if user.save
           render json: UserSerializer.new_user_response(user), status: :created
         else
