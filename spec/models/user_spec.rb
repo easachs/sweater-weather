@@ -15,6 +15,11 @@ RSpec.describe User do
       expect(user).to_not have_attribute(:password)
       expect(user.password_digest).to_not eq('test')
     end
+
+    it 'breaks with different passwords' do
+      user = User.create(email: 'e@g', password: 'test1', password_confirmation: 'test2')
+      expect(user.errors.full_messages * ', ').to eq("Password confirmation doesn't match Password")
+    end
   end
 
   describe 'instance methods' do
