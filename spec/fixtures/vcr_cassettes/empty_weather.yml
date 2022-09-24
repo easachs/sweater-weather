@@ -19,7 +19,7 @@ http_interactions:
       message: ''
     headers:
       Date:
-      - Sat, 24 Sep 2022 04:35:52 GMT
+      - Sat, 24 Sep 2022 04:14:38 GMT
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
@@ -35,13 +35,13 @@ http_interactions:
       Geocodetransactioncount:
       - '0'
       Last-Modified:
-      - Sat, 24 Sep 2022 04:35:52 GMT
+      - Sat, 24 Sep 2022 04:14:38 GMT
       Pragma:
       - no-cache
       Reversegeocodetransactioncount:
       - '0'
       Set-Cookie:
-      - JSESSIONID=845FC9FB3F51B468AFEE4A255513AD14; Path=/; HttpOnly
+      - JSESSIONID=EAE77F0195660F39D2110DB0578A094B; Path=/; HttpOnly
       Status:
       - success
       Transactionweight:
@@ -52,7 +52,7 @@ http_interactions:
         Inc.","imageUrl":"http://api.mqcdn.com/res/mqlogo.gif","imageAltText":"\u00A9
         2022 MapQuest, Inc."},"messages":["Illegal argument from request: Insufficient
         info for location"]},"options":{"maxResults":-1,"thumbMaps":true,"ignoreLatLngInput":false},"results":[{"providedLocation":{"location":""},"locations":[]}]}'
-  recorded_at: Sat, 24 Sep 2022 04:35:52 GMT
+  recorded_at: Sat, 24 Sep 2022 04:14:38 GMT
 - request:
     method: get
     uri: http://api.openweathermap.org/data/2.5/onecall?appid=<openweather_key>&exclude=minutely&lat&lon&units=imperial
@@ -74,7 +74,7 @@ http_interactions:
       Server:
       - openresty
       Date:
-      - Sat, 24 Sep 2022 04:35:52 GMT
+      - Sat, 24 Sep 2022 04:14:38 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -92,5 +92,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"cod":"400","message":"Nothing to geocode"}'
-  recorded_at: Sat, 24 Sep 2022 04:35:52 GMT
+  recorded_at: Sat, 24 Sep 2022 04:14:38 GMT
 recorded_with: VCR 6.1.0
