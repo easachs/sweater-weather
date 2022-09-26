@@ -34,7 +34,7 @@ RSpec.describe 'Book search' do
     end
   end
 
-  it 'errors gracefully', vcr: 'book_req_no_location' do
+  it 'errors gracefully' do
     get '/api/v1/book-search?location='
     none = JSON.parse(response.body, symbolize_names: true)
 
@@ -52,7 +52,7 @@ RSpec.describe 'Book search' do
     expect(none[:error]).to eq('location param required')
   end
 
-  it 'errors gracefully with invalid limit', vcr: 'book_req_bad_limit' do
+  it 'errors gracefully with invalid limit' do
     get '/api/v1/book-search?location=Denver&quantity=none'
     none = JSON.parse(response.body, symbolize_names: true)
 

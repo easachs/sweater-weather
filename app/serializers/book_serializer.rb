@@ -2,13 +2,13 @@
 
 class BookSerializer
   def self.booksearch(location, limit = 5)
-    books = BookFacade.booksearch(location, limit)
-    weather = WeatherFacade.forecast(location)
     if ['', nil].include?(location)
       { error: 'location param required' }
     elsif limit.to_i < 1
       { error: 'invalid limit' }
     else
+      books = BookFacade.booksearch(location, limit)
+      weather = WeatherFacade.forecast(location)
       {
         data: {
           id: nil,
