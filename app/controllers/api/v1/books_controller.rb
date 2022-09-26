@@ -4,7 +4,11 @@ module Api
   module V1
     class BooksController < ApplicationController
       def index
-        render json: BookSerializer.booksearch(params[:location], params[:quantity])
+        if params[:quantity]
+          render json: BookSerializer.booksearch(params[:location], params[:quantity])
+        else
+          render json: BookSerializer.booksearch(params[:location])
+        end
       end
     end
   end
