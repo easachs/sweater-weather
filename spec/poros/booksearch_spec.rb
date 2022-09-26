@@ -2,9 +2,10 @@
 
 require 'rails_helper'
 
-RSpec.describe BookFacade do
-  it 'creates poros', vcr: 'denver_books' do
-    denver = BookFacade.booksearch('Denver')
+RSpec.describe Booksearch do
+  it 'exists and has attributes', vcr: 'denver_books' do
+    service = BookService.booksearch('Denver')
+    denver = Booksearch.new(service)
     expect(denver).to be_a(Booksearch)
     expect(denver.id).to be_nil
     expect(denver.type).to eq('books')
@@ -20,7 +21,7 @@ RSpec.describe BookFacade do
     end
   end
 
-  it 'errors with no location', vcr: 'book_empty_location' do
+  it 'errors gracefully', vcr: 'book_empty_location' do
     none = BookFacade.booksearch('')
     expect(none).to be_a(Booksearch)
     expect(none.total_books_found).to eq(0)

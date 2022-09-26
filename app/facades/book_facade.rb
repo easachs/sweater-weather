@@ -3,6 +3,6 @@
 class BookFacade
   def self.booksearch(location, limit = 5)
     service = BookService.booksearch(location, limit)
-    Book.new(service)
+    Booksearch.new(service)
   end
 end

@@ -1,4 +1,4 @@
-class Book
+class Booksearch
 
   attr_reader :id, :type, :total_books_found, :books
   def initialize(data)
@@ -11,5 +11,6 @@ class Book
         title: book[:title],
         publisher: book[:publisher]? book[:publisher] : []
       }
+    end
   end
 end
