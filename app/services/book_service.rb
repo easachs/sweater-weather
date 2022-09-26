@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class BookService
-  def self.booksearch(location, quantity)
+  def self.booksearch(location, quantity = 5)
     response = conn.get('search.json') do |f|
       f.params['place'] = location
       f.params['limit'] = quantity
