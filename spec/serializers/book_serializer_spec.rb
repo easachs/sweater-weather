@@ -25,6 +25,7 @@ RSpec.describe BookSerializer do
 
     expect(denver[:attributes]).to have_key(:books)
     expect(denver[:attributes][:books]).to be_a(Array)
+    expect(denver[:attributes][:books].length).to eq(5)
     denver[:attributes][:books].each do |book|
       expect(book).to have_key(:isbn)
       expect(book[:isbn]).to be_a(Array)
@@ -41,5 +42,13 @@ RSpec.describe BookSerializer do
     expect(none).to have_key(:error)
     expect(none.keys.length).to eq(1)
     expect(none[:error]).to eq('location param required')
+  end
+
+  it 'errors gracefully with invalid limit', vcr: 'book_req_bad_limit' do
+    none = BookSerializer.booksearch('Denver', -2)
+    expect(none).to be_a(Hash)
+    expect(none).to have_key(:error)
+    expect(none.keys.length).to eq(1)
+    expect(none[:error]).to eq('invalid limit')
   end
 end

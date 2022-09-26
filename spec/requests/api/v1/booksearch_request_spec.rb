@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Book search' do
   it 'returns formatted book search', vcr: 'denver_books_and_weather' do
-    get '/api/v1/book-search?location=Denver&limit=5'
+    get '/api/v1/book-search?location=Denver&quantity=5'
     expect(response).to be_successful
     denver = JSON.parse(response.body, symbolize_names: true)[:data]
 
@@ -23,6 +23,7 @@ RSpec.describe 'Book search' do
 
     expect(denver[:attributes]).to have_key(:books)
     expect(denver[:attributes][:books]).to be_a(Array)
+    expect(denver[:attributes][:books].length).to eq(5)
     denver[:attributes][:books].each do |book|
       expect(book).to have_key(:isbn)
       expect(book[:isbn]).to be_a(Array)
@@ -49,5 +50,15 @@ RSpec.describe 'Book search' do
     expect(none).to have_key(:error)
     expect(none.keys.length).to eq(1)
     expect(none[:error]).to eq('location param required')
+  end
+
+  it 'errors gracefully with invalid limit', vcr: 'book_req_bad_limit' do
+    get '/api/v1/book-search?location=Denver&quantity=-2'
+    none = JSON.parse(response.body, symbolize_names: true)
+
+    expect(none).to be_a(Hash)
+    expect(none).to have_key(:error)
+    expect(none.keys.length).to eq(1)
+    expect(none[:error]).to eq('invalid limit')
   end
 end
