@@ -36,7 +36,7 @@ RSpec.describe BookSerializer do
     end
   end
 
-  it 'errors gracefully', vcr: 'book_req_no_location' do
+  it 'errors gracefully', vcr: 'book_ser_no_location' do
     none = BookSerializer.booksearch('')
     expect(none).to be_a(Hash)
     expect(none).to have_key(:error)
@@ -44,7 +44,7 @@ RSpec.describe BookSerializer do
     expect(none[:error]).to eq('location param required')
   end
 
-  it 'errors gracefully with invalid limit', vcr: 'book_req_bad_limit' do
+  it 'errors gracefully with invalid limit', vcr: 'book_ser_bad_limit' do
     none = BookSerializer.booksearch('Denver', -2)
     expect(none).to be_a(Hash)
     expect(none).to have_key(:error)

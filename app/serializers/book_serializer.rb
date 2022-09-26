@@ -6,7 +6,7 @@ class BookSerializer
     weather = WeatherFacade.forecast(location)
     if ['', nil].include?(location)
       { error: 'location param required' }
-    elsif limit < 1
+    elsif limit.to_i < 1
       { error: 'invalid limit' }
     else
       {

@@ -53,7 +53,7 @@ RSpec.describe 'Book search' do
   end
 
   it 'errors gracefully with invalid limit', vcr: 'book_req_bad_limit' do
-    get '/api/v1/book-search?location=Denver&quantity=-2'
+    get '/api/v1/book-search?location=Denver&quantity=none'
     none = JSON.parse(response.body, symbolize_names: true)
 
     expect(none).to be_a(Hash)
