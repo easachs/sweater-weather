@@ -9,8 +9,8 @@ class BookSerializer
     else
       {
         data: {
-          id: books.id,
-          type: books.type,
+          id: nil,
+          type: 'books',
           attributes: {
             destination: location,
             forecast: {
@@ -20,9 +20,9 @@ class BookSerializer
             total_books_found: books.total_books_found,
             books: books.books.map do |book|
               {
-                isbn: book.isbn,
-                title: book.title,
-                publisher: book.publisher
+                isbn: book[:isbn],
+                title: book[:title],
+                publisher: book[:publisher]
               }
             end
           }

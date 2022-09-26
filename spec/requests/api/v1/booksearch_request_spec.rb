@@ -6,12 +6,7 @@ RSpec.describe 'Book search' do
   it 'returns formatted book search', vcr: 'denver_books_and_weather' do
     get '/api/v1/book-search?location=Denver&limit=5'
     expect(response).to be_successful
-    denver = JSON.parse(response.body, symbolize_names: true)
-
-    expect(denver).to have_key(:id)
-    expect(denver[:id]).to be_nil
-    expect(denver).to have_key(:type)
-    expect(denver[:type]).to eq('books')
+    denver = JSON.parse(response.body, symbolize_names: true)[:data]
 
     expect(denver).to have_key(:attributes)
     expect(denver[:attributes]).to have_key(:destination)
@@ -23,12 +18,12 @@ RSpec.describe 'Book search' do
     expect(denver[:attributes][:forecast]).to have_key(:temperature)
     expect(denver[:attributes][:forecast][:temperature]).to be_a(String)
 
-    expect(denver).to have_key(:total_books_found)
-    expect(denver[:total_books_found]).to be_a(Integer)
+    expect(denver[:attributes]).to have_key(:total_books_found)
+    expect(denver[:attributes][:total_books_found]).to be_a(Integer)
 
-    expect(denver).to have_key(:books)
-    expect(denver[:books]).to be_a(Array)
-    denver[:books].each do |book|
+    expect(denver[:attributes]).to have_key(:books)
+    expect(denver[:attributes][:books]).to be_a(Array)
+    denver[:attributes][:books].each do |book|
       expect(book).to have_key(:isbn)
       expect(book[:isbn]).to be_a(Array)
       expect(book).to have_key(:title)
@@ -40,7 +35,6 @@ RSpec.describe 'Book search' do
 
   it 'errors gracefully', vcr: 'book_req_no_location' do
     get '/api/v1/book-search?location='
-    expect(response).to be_successful
     none = JSON.parse(response.body, symbolize_names: true)
 
     expect(none).to be_a(Hash)
@@ -49,7 +43,6 @@ RSpec.describe 'Book search' do
     expect(none[:error]).to eq('location param required')
 
     get '/api/v1/book-search'
-    expect(response).to be_successful
     none = JSON.parse(response.body, symbolize_names: true)
 
     expect(none).to be_a(Hash)
