@@ -9,7 +9,7 @@ module Api
         if user&.authenticate(user_params[:password])
           render json: UserSerializer.new_user_response(user)
         else
-          render json: { error: 'invalid credentials' }, status: 400
+          render json: { error: 'invalid credentials' }, status: 401
         end
       end
     end
