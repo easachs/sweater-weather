@@ -49,6 +49,7 @@ RSpec.describe Weather do
     end
 
     expect(denver.hourly_weather).to be_a(Array)
+    expect(denver.hourly_weather.length).to eq(48)
     denver.hourly_weather.each do |hour|
       expect(hour).to be_a(Hash)
       expect(hour).to have_key(:time)

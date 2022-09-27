@@ -11,8 +11,8 @@ class WeatherSerializer
         type: weather.type,
         attributes: {
           current_weather: weather.current_weather,
-          daily_weather: weather.daily_weather,
-          hourly_weather: weather.hourly_weather
+          daily_weather: weather.daily_weather[0..4],
+          hourly_weather: weather.hourly_weather[0..7]
         }
       }
     end

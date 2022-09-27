@@ -64,10 +64,7 @@ RSpec.describe 'Roadtrip request' do
     expect(impossible[:attributes]).to have_key(:travel_time)
     expect(impossible[:attributes][:travel_time]).to be_a(String)
     expect(impossible[:attributes][:travel_time]).to eq('impossible route')
-    expect(impossible[:attributes]).to have_key(:weather_at_eta)
-    expect(impossible[:attributes][:weather_at_eta]).to have_key(:temperature)
-    expect(impossible[:attributes][:weather_at_eta]).to have_key(:conditions)
-    expect(impossible[:attributes][:weather_at_eta][:conditions]).to be_a(String)
+    expect(impossible[:attributes]).to_not have_key(:weather_at_eta)
   end
 
   it 'sad path bad api key' do

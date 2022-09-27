@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Roadtrip
-  attr_reader :start_city, :end_city, :time, :travel_time
+  attr_reader :start_city, :end_city, :time, :hrs, :travel_time
 
   def initialize(data)
     if data[:route][:locations]
@@ -11,7 +11,7 @@ class Roadtrip
       @end_city = "#{destination[:adminArea5]}, #{destination[:adminArea3]}"
     end
     @time = data[:route][:time]
-    hrs = time.to_i / 3600
+    @hrs = time.to_i / 3600
     mins = (time.to_i / 60) % 60
     @travel_time = "#{hrs} hours, #{mins} minutes" if time
   end

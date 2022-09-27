@@ -27,7 +27,7 @@ RSpec.describe User do
       user = User.create(email: 'e@g', password: 'test', password_confirmation: 'test')
       expect(user.api_key).to_not be_nil
       expect(user.api_key).to be_a(String)
-      expect(user.api_key.length).to eq(32)
+      expect(user.api_key.length).to eq(24)
     end
   end
 end

@@ -6,7 +6,7 @@ RSpec.describe BookFacade do
   it 'creates poros', vcr: 'denver_books' do
     denver = BookFacade.booksearch('Denver')
     expect(denver).to be_a(Booksearch)
-    expect(denver.total_books_found).to eq(1490)
+    expect(denver.total_books_found).to eq(8849)
     expect(denver.books).to be_a(Array)
     denver.books.each do |book|
       expect(book).to have_key(:isbn)

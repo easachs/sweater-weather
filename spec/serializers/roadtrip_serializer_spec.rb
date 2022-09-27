@@ -39,10 +39,6 @@ RSpec.describe RoadtripSerializer do
     expect(none[:attributes][:end_city]).to be_nil
     expect(none[:attributes]).to have_key(:travel_time)
     expect(none[:attributes][:travel_time]).to eq('impossible route')
-    expect(none[:attributes]).to have_key(:weather_at_eta)
-    expect(none[:attributes][:weather_at_eta]).to have_key(:temperature)
-    expect(none[:attributes][:weather_at_eta][:temperature]).to be_nil
-    expect(none[:attributes][:weather_at_eta]).to have_key(:conditions)
-    expect(none[:attributes][:weather_at_eta][:conditions]).to be_nil
+    expect(none[:attributes]).to_not have_key(:weather_at_eta)
   end
 end

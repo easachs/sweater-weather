@@ -15,8 +15,6 @@ RSpec.describe BookService do
 
     denver[:docs].each do |book|
       expect(book).to be_a(Hash)
-      # expect(book).to have_key(:isbn)
-      # expect(book[:isbn]).to be_a(Array)
       expect(book).to have_key(:title)
       expect(book[:title]).to be_a(String)
       expect(book).to have_key(:publisher)
@@ -28,9 +26,10 @@ RSpec.describe BookService do
     none = BookService.booksearch('')
     expect(none).to be_a(Hash)
     expect(none).to have_key(:numFound)
+    expect(none[:numFound]).to eq(0)
     expect(none).to have_key(:docs)
     expect(none[:docs]).to eq([])
-    expect(none).to have_key(:error)
-    expect(none[:error]).to eq('Received None response from run_solr_query')
+    expect(none).to have_key(:q)
+    expect(none[:q]).to eq('')
   end
 end
