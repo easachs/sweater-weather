@@ -46,7 +46,7 @@ class Weather
 
   def hourly_weather
     if attributes[:hourly]
-      attributes[:hourly][0..7].map do |hour|
+      attributes[:hourly].map do |hour|
         {
           time: Time.at(hour[:dt]).to_datetime.strftime('%T'),
           temperature: hour[:temp].to_f,
