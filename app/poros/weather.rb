@@ -45,15 +45,13 @@ class Weather
   end
 
   def hourly_weather
-    if attributes[:hourly]
-      attributes[:hourly].map do |hour|
-        {
-          time: Time.at(hour[:dt]).to_datetime.strftime('%T'),
-          temperature: hour[:temp].to_f,
-          conditions: hour[:weather].first[:description],
-          icon: hour[:weather].first[:icon]
-        }
-      end
+    attributes[:hourly]&.map do |hour|
+      {
+        time: Time.at(hour[:dt]).to_datetime.strftime('%T'),
+        temperature: hour[:temp].to_f,
+        conditions: hour[:weather].first[:description],
+        icon: hour[:weather].first[:icon]
+      }
     end
   end
 end

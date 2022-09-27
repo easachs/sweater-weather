@@ -4,7 +4,7 @@ module Api
   module V1
     class RoadtripController < ApplicationController
       def create
-        user = User.find_by(api_key: request_params[:api_key]) unless !request_params
+        user = User.find_by(api_key: request_params[:api_key]) if request_params
         if !request_params
           render json: { error: 'missing JSON payload in request body' }, status: 400
         elsif !(request_params[:origin] && request_params[:destination])

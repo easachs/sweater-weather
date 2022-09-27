@@ -4,7 +4,7 @@ module Api
   module V1
     class UsersController < ApplicationController
       def create
-        user = User.create(request_params) unless !request_params
+        user = User.create(request_params) if request_params
         if !request_params
           render json: { error: 'missing JSON payload in request body' }, status: 400
         elsif user.save
