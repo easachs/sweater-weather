@@ -41,7 +41,7 @@ RSpec.describe 'Login' do
     }
 
     post '/api/v1/sessions', params: params.to_json
-    expect(response.status).to eq(400)
+    expect(response.status).to eq(401)
     parsed_response = JSON.parse(response.body, symbolize_names: true)
     expect(parsed_response).to eq({ error: 'invalid credentials' })
   end
@@ -52,7 +52,7 @@ RSpec.describe 'Login' do
     }
 
     post '/api/v1/sessions', params: params.to_json
-    expect(response.status).to eq(400)
+    expect(response.status).to eq(401)
     parsed_response = JSON.parse(response.body, symbolize_names: true)
     expect(parsed_response).to eq({ error: 'invalid credentials' })
   end
@@ -63,7 +63,7 @@ RSpec.describe 'Login' do
     }
 
     post '/api/v1/sessions', params: params.to_json
-    expect(response.status).to eq(400)
+    expect(response.status).to eq(401)
     parsed_response = JSON.parse(response.body, symbolize_names: true)
     expect(parsed_response).to eq({ error: 'invalid credentials' })
   end
