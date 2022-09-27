@@ -27,4 +27,26 @@ RSpec.describe GeocodeService do
     expect(none[:info][:messages]).to eq(['Illegal argument from request: Insufficient info for location'])
     expect(none[:results].first[:locations]).to be_empty
   end
+
+  it 'returns response body for route', vcr: 'trip_denver_boulder' do
+    roadtrip = GeocodeService.roadtrip('Denver,CO', 'Boulder,CO')
+    expect(roadtrip).to be_a(Hash)
+    expect(roadtrip).to have_key(:route)
+    expect(roadtrip[:route]).to have_key(:locations)
+    expect(roadtrip[:route][:locations].first).to have_key(:adminArea5)
+    expect(roadtrip[:route][:locations].first[:adminArea5]).to be_a(String)
+    expect(roadtrip[:route][:locations].last).to have_key(:adminArea3)
+    expect(roadtrip[:route][:locations].last[:adminArea3]).to be_a(String)
+    expect(roadtrip[:route]).to have_key(:time)
+    expect(roadtrip[:route][:time]).to be_a(Integer)
+  end
+
+  it 'errors with no location', vcr: 'trip_empty' do
+    none = GeocodeService.roadtrip('', '')
+    expect(none).to be_a(Hash)
+    expect(none).to have_key(:info)
+    expect(none[:info]).to have_key(:statuscode)
+    expect(none[:info][:statuscode]).to eq(611)
+    expect(none[:info][:messages]).to eq(['At least two locations must be provided.'])
+  end
 end
