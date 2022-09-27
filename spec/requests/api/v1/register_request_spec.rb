@@ -84,4 +84,11 @@ RSpec.describe 'Register' do
     parsed_response = JSON.parse(response.body, symbolize_names: true)
     expect(parsed_response).to eq({ error: 'Email has already been taken' })
   end
+
+  it 'errors when no JSON payload' do
+    post '/api/v1/users'
+    expect(response.status).to eq(400)
+    parsed_response = JSON.parse(response.body, symbolize_names: true)
+    expect(parsed_response).to eq({ error: 'missing JSON payload in request body' })
+  end
 end
