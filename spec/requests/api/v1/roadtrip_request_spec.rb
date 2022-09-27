@@ -138,4 +138,11 @@ RSpec.describe 'Roadtrip request' do
     expect(none.keys.length).to eq(1)
     expect(none[:error]).to eq('you must include origin and destination')
   end
+
+  it 'errors when no JSON payload' do
+    post '/api/v1/road_trip'
+    expect(response.status).to eq(400)
+    parsed_response = JSON.parse(response.body, symbolize_names: true)
+    expect(parsed_response).to eq({ error: 'missing JSON payload in request body' })
+  end
 end

@@ -67,4 +67,11 @@ RSpec.describe 'Login' do
     parsed_response = JSON.parse(response.body, symbolize_names: true)
     expect(parsed_response).to eq({ error: 'invalid credentials' })
   end
+
+  it 'errors when no JSON payload' do
+    post '/api/v1/sessions'
+    expect(response.status).to eq(400)
+    parsed_response = JSON.parse(response.body, symbolize_names: true)
+    expect(parsed_response).to eq({ error: 'missing JSON payload in request body' })
+  end
 end
